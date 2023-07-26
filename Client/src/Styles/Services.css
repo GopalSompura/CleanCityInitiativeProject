@@ -1,0 +1,38 @@
+.messageContent{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-bottom:5em;
+}
+.Messagebox{
+    width: fit-content;
+    padding: 20px;
+    border: 2px solid black;
+    
+}
+.sendMessage{
+    width: fit-content;
+    border: 2px solid black;    
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+.sendMessagebtn{
+    cursor: pointer;
+    background-color: aquamarine;;
+    border: none;
+    width: fit-content;
+    padding: 10px 30px;
+    border-radius: 5px;
+}
+.sendMessagebtn:hover{
+    background-color: rgb(0, 223, 148);
+    transition: all 0.2s ease-in-out;
+}
+.inputtitle{
+    padding: 10px;
+}
