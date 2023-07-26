@@ -11,6 +11,7 @@ function WasteCollection() {
   const userdetails = localStorage.getItem("user");
   const currentuser = JSON.parse(userdetails);
   const token = localStorage.getItem("token");
+  console.log(token);
 
   const [conversation, setConversation] = useState([]);
   const [messages, setMessages] = useState([]);
