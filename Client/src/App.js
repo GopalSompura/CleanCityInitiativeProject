@@ -4,6 +4,7 @@ import Signin from "./Components/Signin";
 import Signup from "./Components/Signup";
 import Profile from "./Components/Profile";
 import WasteCollection from "./Components/Services/WasteCollection";
+import Payment from "./Components/Payment";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/Signup" element={<Signup />}></Route>
         <Route path="/Profile" element={<Profile />}></Route>
         <Route path="/WasteCollection" element={<WasteCollection />}></Route>
+        <Route path="/Payment" element={<Payment />}></Route>
       </Routes>
     </>
   );

@@ -69,6 +69,20 @@ header nav ul li .arrow{
     text-underline-offset:23px;
     transition: all 0.3s ease-in-out;
 }
+#payment-btn{
+    color: #fff;
+    text-transform: none;
+    font-size: 15px;
+    position: relative;
+    background: none;
+    text-decoration: none;
+    top: 1px;
+}
+#payment-btn:hover{
+    text-decoration: 5px underline rgb(134, 5, 255)  ;
+    text-underline-offset:23px;
+    transition: all 0.3s ease-in-out;
+}
 .backgroundimage{
     height:100vh;
     width: 100%;

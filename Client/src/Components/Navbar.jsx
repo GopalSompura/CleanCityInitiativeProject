@@ -103,9 +103,9 @@ function Navbar() {
               <MenuItem onClick={handleCloseE}>Lost and Found Objects</MenuItem>
               <MenuItem onClick={handleCloseE}>Potential Hazard</MenuItem>
             </Menu>
-            <li>
-              <a href="">Payment</a>
-            </li>
+            <Link id="payment-btn" to="/Payment">
+              Payment
+            </Link>
             <li>
               <a href="">Customer Service</a>
             </li>

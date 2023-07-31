@@ -1,0 +1,20 @@
+.main{
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+#paybtn{
+    width:fit-content;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: black;
+    background-color: none;
+    border: 1px solid black ;
+}
+#paybtn:hover{
+    color: white;
+    background-color: rgb(134, 5, 255);
+    border: none;
+}
