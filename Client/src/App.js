@@ -5,6 +5,8 @@ import Signup from "./Components/Signup";
 import Profile from "./Components/Profile";
 import WasteCollection from "./Components/Services/WasteCollection";
 import Payment from "./Components/Payment";
+import Success from "./Components/Success";
+import Cancel from "./Components/Cancel";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="/Profile" element={<Profile />}></Route>
         <Route path="/WasteCollection" element={<WasteCollection />}></Route>
         <Route path="/Payment" element={<Payment />}></Route>
+        <Route path="/Success" element={<Success />}></Route>
+        <Route path="/Cancel" element={<Cancel />}></Route>
       </Routes>
     </>
   );

@@ -4,6 +4,7 @@ import "dotenv/config";
 const server = express();
 import userRouter from "./Route/User.js";
 import authRouter from "./Route/Auth.js";
+import stripeRouter from "./Route/Stripe.js";
 import cors from "cors";
 import conversationRouter from "./Route/Conversation.js";
 import messageRouter from "./Route/Message.js";
@@ -31,6 +32,7 @@ server.use("/", authRouter);
 server.use("/", userRouter);
 server.use("/conversations", conversationRouter);
 server.use("/messages", messageRouter);
+server.use("/payment", stripeRouter);
 
 //DB connection
 async function main() {

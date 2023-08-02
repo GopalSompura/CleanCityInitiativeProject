@@ -60,18 +60,17 @@ export async function loginUser(req, res) {
     const user = await userModel.findOne({ Email: req.body.Email }).exec();
     const userid = user._id;
 
-    if (!user) {
-      res.status(401).json({ message: "Email id is Incorrect" });
-    }
-    if (req.body.Password === "") {
+    if (!user || req.body.Email === "") {
+      res
+        .status(401)
+        .json({
+          message: "Either Email id is Incorrect or the field is empty",
+        });
+    } else if (req.body === "") {
+      res.json({ message: "Every field must be filled" });
+    } else if (req.body.Password === "") {
       res.json({ message: "Password cannot be empty" });
-    } else if (!passwordregex.test(req.body.Password)) {
-      res.json({
-        message:
-          "Password must be - Minimun 8 characters, Must have at least one uppercase letter, Must have at least one lowercase letter, Must have at least one special character : @ , $ , ! , % , * , ? , &",
-      });
     }
-
     const match = await bcrypt.compare(req.body.Password, user.Password);
 
     if (match) {
