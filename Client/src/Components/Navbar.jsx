@@ -69,9 +69,9 @@ function Navbar() {
             <h1>GreenTech</h1>
           </Link>
           <ul>
-            <li>
-              <a href="">About us</a>
-            </li>
+            <Link to="/aboutus" id="aboutbtn">
+              About Us
+            </Link>
             <Button
               id="fade-button"
               aria-controls={openmenu ? "fade-menu" : undefined}
@@ -149,11 +149,13 @@ function Navbar() {
                     </IconButton>
                   </Tooltip>
                   {token ? (
-                    <div className="notification">
-                      <Badge badgeContent={0} color="secondary">
-                        <MailIcon color="white" />
-                      </Badge>
-                    </div>
+                    <Link to="/message">
+                      <div className="notification">
+                        <Badge badgeContent={0}>
+                          <MailIcon />
+                        </Badge>
+                      </div>
+                    </Link>
                   ) : (
                     <></>
                   )}

@@ -5,7 +5,6 @@ import Navbar from "./Navbar";
 import { useState } from "react";
 import axios from "axios";
 function Payment() {
-  const [details, setDetails] = useState([]);
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const handleamount = (e) => {
@@ -45,7 +44,7 @@ function Payment() {
         onChange={handledescription}
       />
       <button onClick={() => handlepayment()}>Pay now</button>
-      {/* <Footer/> */}
+      <Footer />
     </>
   );
 }
