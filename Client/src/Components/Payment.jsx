@@ -29,21 +29,23 @@ function Payment() {
   return (
     <>
       <Navbar />
-      <input
-        type="text"
-        name="amount"
-        placeholder="Amount"
-        className="amounttext"
-        onChange={handleamount}
-      />
-      <input
-        type="text"
-        name="description"
-        placeholder="Description"
-        className="descriptiontext"
-        onChange={handledescription}
-      />
-      <button onClick={() => handlepayment()}>Pay now</button>
+      <div className="pay">
+        <input
+          type="text"
+          name="amount"
+          placeholder="Amount"
+          className="amounttext"
+          onChange={handleamount}
+        />
+        <input
+          type="text"
+          name="description"
+          placeholder="Description"
+          className="descriptiontext"
+          onChange={handledescription}
+        />
+        <button onClick={() => handlepayment()}>Pay now</button>
+      </div>
       <Footer />
     </>
   );

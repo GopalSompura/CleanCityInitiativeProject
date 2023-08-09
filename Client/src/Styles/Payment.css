@@ -19,3 +19,11 @@
     background-color: rgb(134, 5, 255);
     border: none;
 }
+.pay{
+    margin: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
