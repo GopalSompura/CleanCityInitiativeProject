@@ -2,10 +2,12 @@ import { Link, useNavigate } from "react-router-dom";
 import "../Styles/Signin&Signup.css";
 import { useState } from "react";
 import Footer from "./Footer";
+
 function Signup() {
   const [form, setForm] = useState({});
   const [validation, setValidation] = useState("");
   const [error, setError] = useState(true);
+  const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
   const handleform = (e) => {
     setForm({
@@ -26,7 +28,6 @@ function Signup() {
     const result = await res.json();
     console.log(result);
     if (result.user || result.message) {
-      alert(result.message);
       setError(false);
       setValidation(result.message);
     } else if (
@@ -39,6 +40,9 @@ function Signup() {
       setError(false);
       setValidation("Every field must be filled");
     } else {
+      localStorage.setItem("result", result);
+      setSuccess(true);
+      localStorage.setItem("success", success);
       navigate("/Signin");
     }
   };
@@ -108,6 +112,7 @@ function Signup() {
           </form>
         </div>
       </div>
+      ;
       <Footer />
     </>
   );

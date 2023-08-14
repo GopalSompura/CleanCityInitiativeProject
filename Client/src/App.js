@@ -8,6 +8,7 @@ import Payment from "./Components/Payment";
 import Success from "./Components/Success";
 import Cancel from "./Components/Cancel";
 import Message from "./Components/Services/Message";
+import CustomerService from "./Components/CustomerService";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/Payment" element={<Payment />}></Route>
         <Route path="/Success" element={<Success />}></Route>
         <Route path="/Cancel" element={<Cancel />}></Route>
+        <Route path="/CustomerService" element={<CustomerService />}></Route>
         <Route path="/message" element={<Message />}></Route>
       </Routes>
     </>

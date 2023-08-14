@@ -21,6 +21,62 @@ import MailIcon from "@mui/icons-material/Mail";
 import { useState } from "react";
 import { useEffect } from "react";
 function Navbar() {
+  const userdetails = localStorage.getItem("user");
+  const currentuser = JSON.parse(userdetails);
+  const [conversation, setConversation] = useState([]);
+  const [count, setCount] = useState(0);
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    const getConversations = async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:8080/conversations/${currentuser.userid}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const response = await res.json();
+        response.map((r) => {
+          return setConversation(r);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getConversations();
+  }, [currentuser.userid]);
+
+  useEffect(() => {
+    const getMessages = async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:8080/messages/${conversation._id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const response = await res.json();
+        setMessages(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getMessages();
+  }, [conversation._id, currentuser.userid]);
+
+  useEffect(() => {
+    if (messages) {
+      setCount((count) => count + 1);
+    }
+  }, [messages]);
+
   //services menu
   const [anchor, setAnchor] = React.useState(null);
   const openmenu = Boolean(anchor);
@@ -40,8 +96,7 @@ function Navbar() {
     setAnchorEl(null);
   };
   let navigate = useNavigate();
-  const userdetails = localStorage.getItem("user");
-  const currentuser = JSON.parse(userdetails);
+
   const updatedusername = localStorage.getItem("updatedusername");
   const updatedimage = localStorage.getItem("updatedimage");
   const token = localStorage.getItem("token");
@@ -57,8 +112,13 @@ function Navbar() {
     localStorage.removeItem("token");
     localStorage.removeItem("updatedusername");
     localStorage.removeItem("updatedimage");
+    localStorage.removeItem("result");
     setUser("");
     navigate("/Signin");
+  };
+
+  const handlenotify = () => {
+    setCount(0);
   };
 
   return (
@@ -106,9 +166,9 @@ function Navbar() {
             <Link id="payment-btn" to="/Payment">
               Payment
             </Link>
-            <li>
-              <a href="">Customer Service</a>
-            </li>
+            <Link id="payment-btn" to="/CustomerService">
+              Contact us
+            </Link>
           </ul>
 
           <div className="userlink">
@@ -151,7 +211,14 @@ function Navbar() {
                   {token ? (
                     <Link to="/message">
                       <div className="notification">
-                        <Badge badgeContent={0}>
+                        <Badge
+                          badgeContent={
+                            currentuser.userid == "64ace0757520c5dbededc62e"
+                              ? count
+                              : 0
+                          }
+                          onClick={handlenotify}
+                        >
                           <MailIcon />
                         </Badge>
                       </div>

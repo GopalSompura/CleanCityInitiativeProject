@@ -5,8 +5,14 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 import Footer from "../Footer";
+import Rating from "@mui/material/Rating";
 
 function WasteCollection() {
+  const [value, setValue] = React.useState(0);
+  const [feedback, setFeedback] = useState("");
+  console.log(value);
+  console.log(feedback);
+
   const userdetails = localStorage.getItem("user");
   const currentuser = JSON.parse(userdetails);
   const token = localStorage.getItem("token");
@@ -27,7 +33,6 @@ function WasteCollection() {
       });
     });
   }, []);
-
   useEffect(() => {
     receivedmessage &&
       conversation?.members.includes(receivedmessage.sender) &&
@@ -95,6 +100,7 @@ function WasteCollection() {
     const receiverid = conversation.members.find(
       (member) => member !== currentuser.userid
     );
+    localStorage.setItem("receiverid", receiverid);
     socket.current.emit("sendmessaage", {
       senderid: currentuser.userid,
       receiverid,
@@ -116,42 +122,62 @@ function WasteCollection() {
   return (
     <>
       <Navbar />
-      <h1>This is waste collection service page</h1>
-      {token ? (
-        <div className="messageContent">
-          {messages.map((m) => {
-            return <Message message={m} />;
-          })}
-          <div className="sendMessage">
-            <input
-              type="text"
-              name="title"
-              id=""
-              placeholder="Title of the send message "
-              className="inputtitle"
-              onChange={(e) => setNewtitle(e.target.value)}
-              value={newtitle}
-              minLength="3"
-            />
-            <textarea
-              name=""
-              id=""
-              cols="30"
-              rows="10"
-              className="inputmessage"
-              placeholder="Write message here"
-              onChange={(e) => setNewmessages(e.target.value)}
-              value={newmessages}
-              minLength="3"
-            ></textarea>
-            <button className="sendMessagebtn" onClick={handlesubmit}>
-              Send
-            </button>
+      <div className="wastepage">
+        {token ? (
+          <div className="messageContent">
+            <div className="sendMessage">
+              <input
+                type="text"
+                name="title"
+                id=""
+                placeholder="Title of the send message "
+                className="inputtitle"
+                onChange={(e) => setNewtitle(e.target.value)}
+                value={newtitle}
+                minLength="3"
+              />
+              <textarea
+                name=""
+                id=""
+                cols="30"
+                rows="10"
+                className="inputmessage"
+                placeholder="Write message here"
+                onChange={(e) => setNewmessages(e.target.value)}
+                value={newmessages}
+                minLength="3"
+              ></textarea>
+              <button className="sendMessagebtn" onClick={handlesubmit}>
+                Send
+              </button>
+            </div>
           </div>
-        </div>
-      ) : (
-        <h2>This is main content</h2>
-      )}
+        ) : (
+          <h2>This is main content</h2>
+        )}
+      </div>
+      <div className="feedback">
+        <h1>Give Review</h1>
+        <Rating
+          name="simple-controlled"
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+        />
+        <textarea
+          name=""
+          id=""
+          cols="30"
+          rows="10"
+          className="inputmessage"
+          placeholder="Write your review"
+          onChange={(e) => setFeedback(e.target.value)}
+          value={feedback}
+          minLength="3"
+        ></textarea>
+        <button className="sendMessagebtn">Submit Feedback</button>
+      </div>
       <Footer />
     </>
   );

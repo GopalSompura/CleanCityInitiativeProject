@@ -26,7 +26,7 @@ export default async function createUser(req, res) {
     res.json({
       message: "First name or Last name cannot contain special characters",
     });
-  } else if (req.body.Password == "") {
+  } else if (req.body.Password === null || req.body.ConfirmPassword == null) {
     res.json({ message: "Every field must be filled" });
   } else if (!passwordregex.test(req.body.Password)) {
     res.json({
@@ -61,11 +61,9 @@ export async function loginUser(req, res) {
     const userid = user._id;
 
     if (!user || req.body.Email === "") {
-      res
-        .status(401)
-        .json({
-          message: "Either Email id is Incorrect or the field is empty",
-        });
+      res.status(401).json({
+        message: "Either Email id is Incorrect or the field is empty",
+      });
     } else if (req.body === "") {
       res.json({ message: "Every field must be filled" });
     } else if (req.body.Password === "") {

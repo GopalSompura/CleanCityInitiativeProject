@@ -9,7 +9,7 @@
 .Messagebox{
     width: fit-content;
     padding: 20px;
-    border: 2px solid black;
+    margin: 200px;
     
 }
 .sendMessage{
@@ -23,11 +23,12 @@
 }
 .sendMessagebtn{
     cursor: pointer;
-    background-color: aquamarine;;
+    background-color: aquamarine;
     border: none;
     width: fit-content;
     padding: 10px 30px;
     border-radius: 5px;
+    border: 1px rgb(0, 128, 85) solid;
 }
 .sendMessagebtn:hover{
     background-color: rgb(0, 223, 148);
@@ -35,4 +36,18 @@
 }
 .inputtitle{
     padding: 10px;
+}
+.wastepage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 100px;
+}
+.feedback{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 100px;
 }

@@ -1,13 +1,23 @@
 import { Link, useNavigate } from "react-router-dom";
 import "../Styles/Signin&Signup.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Footer from "./Footer";
-
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
 function Signin() {
+  let success = localStorage.getItem("success");
+  let result = localStorage.getItem("result");
   const [form, setForm] = useState({});
   const [validation, setValidation] = useState("");
   const [error, setError] = useState(true);
+  const [change, setChange] = useState(success);
   let navigate = useNavigate();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setChange(false);
+    }, 3000);
+  }, []);
 
   const handleform = (e) => {
     setForm({
@@ -46,6 +56,26 @@ function Signin() {
   return (
     <>
       <div className="auth-wrapper-signin">
+        {change && result ? (
+          <Stack
+            sx={{ width: "100%" }}
+            spacing={2}
+            style={{ alignItems: "center", marginTop: "25px" }}
+          >
+            <Alert
+              icon={false}
+              severity="success"
+              style={{
+                backgroundColor: "rgb(7, 0, 150)",
+                color: "white",
+              }}
+            >
+              Account created Successfully
+            </Alert>
+          </Stack>
+        ) : (
+          ""
+        )}
         <div className="auth-inner-signin">
           <form onSubmit={handlesubmit}>
             <h1>GreenTech Solution Inc</h1>
@@ -71,19 +101,6 @@ function Signin() {
               />
             </div>
             {error ? "" : <p className="validations">{validation}</p>}
-
-            <div className="mb-3">
-              <div className="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="customCheck1"
-                />
-                <label className="custom-control-label" htmlFor="customCheck1">
-                  Remember me
-                </label>
-              </div>
-            </div>
 
             <input className="submitbtn-signin" type="submit" value="Submit" />
             <p className="forgot-password text-right">
