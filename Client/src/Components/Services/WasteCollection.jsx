@@ -2,7 +2,6 @@ import React from "react";
 import Navbar from "../Navbar";
 import "../../Styles/Services.css";
 import { useState, useEffect, useRef } from "react";
-import Message from "./Message";
 import axios from "axios";
 import { io } from "socket.io-client";
 import Footer from "../Footer";
