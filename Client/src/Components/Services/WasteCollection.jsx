@@ -8,21 +8,22 @@ import Footer from "../Footer";
 import Rating from "@mui/material/Rating";
 
 function WasteCollection() {
-  const [value, setValue] = React.useState(0);
-  const [feedback, setFeedback] = useState("");
-  console.log(value);
-  console.log(feedback);
-
   const userdetails = localStorage.getItem("user");
   const currentuser = JSON.parse(userdetails);
   const token = localStorage.getItem("token");
-
   const [conversation, setConversation] = useState([]);
   const [messages, setMessages] = useState([]);
   const [newmessages, setNewmessages] = useState("");
   const [newtitle, setNewtitle] = useState("");
   const [receivedmessage, setreceivedmessage] = useState(null);
   const socket = useRef();
+
+  const [feedback, setFeedback] = useState({
+    senderid: currentuser.userid,
+    rating: "",
+    comment: "",
+  });
+
   useEffect(() => {
     socket.current = io("ws://localhost:8900");
     socket.current.on("getmessage", (data) => {
@@ -100,7 +101,6 @@ function WasteCollection() {
     const receiverid = conversation.members.find(
       (member) => member !== currentuser.userid
     );
-    localStorage.setItem("receiverid", receiverid);
     socket.current.emit("sendmessaage", {
       senderid: currentuser.userid,
       receiverid,
@@ -112,12 +112,39 @@ function WasteCollection() {
         "http://localhost:8080/messages/Message",
         message
       );
+      alert("Message send Successfully");
       setMessages([...messages, res.data]);
       setNewmessages("");
       setNewtitle("");
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handlechange = (event) => {
+    setFeedback({
+      ...feedback,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handlefeedback = async (event) => {
+    event.preventDefault();
+
+    try {
+      // Send feedback data to the backend API endpoint
+      const res = await axios.post(
+        "http://localhost:8080/feedbacks/reviews",
+        feedback
+      );
+      // Clear the form input values
+      console.log(res);
+      setFeedback({ senderid: currentuser.userid, rating: "", comment: "" });
+    } catch (error) {
+      // Handle any errors that occur during form submission
+      console.error("Error submitting feedback:", error);
+    }
+    //over
   };
   return (
     <>
@@ -157,27 +184,27 @@ function WasteCollection() {
         )}
       </div>
       <div className="feedback">
-        <h1>Give Review</h1>
-        <Rating
-          name="simple-controlled"
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-        />
-        <textarea
-          name=""
-          id=""
-          cols="30"
-          rows="10"
-          className="inputmessage"
-          placeholder="Write your review"
-          onChange={(e) => setFeedback(e.target.value)}
-          value={feedback}
-          minLength="3"
-        ></textarea>
-        <button className="sendMessagebtn">Submit Feedback</button>
+        <h1>Give your Review</h1>
+        <form onSubmit={handlefeedback}>
+          <Rating
+            name="rating"
+            value={feedback.rating}
+            onChange={handlechange}
+          />
+          <textarea
+            name="comment"
+            cols="30"
+            rows="10"
+            className="inputmessage"
+            placeholder="Write your review"
+            onChange={handlechange}
+            value={feedback.comment}
+            minLength="3"
+          ></textarea>
+          <button className="sendMessagebtn">Submit Feedback</button>
+        </form>
       </div>
+
       <Footer />
     </>
   );

@@ -25,7 +25,6 @@
     cursor: pointer;
     background-color: aquamarine;
     border: none;
-    width: fit-content;
     padding: 10px 30px;
     border-radius: 5px;
     border: 1px rgb(0, 128, 85) solid;
@@ -49,5 +48,5 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
-    margin: 100px;
+    margin: 150px;
 }

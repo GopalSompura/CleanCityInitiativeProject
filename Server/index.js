@@ -8,6 +8,7 @@ import stripeRouter from "./Route/Stripe.js";
 import cors from "cors";
 import conversationRouter from "./Route/Conversation.js";
 import messageRouter from "./Route/Message.js";
+import feedbackRouter from "./Route/Feedback.js";
 // import Server from "socket.io";
 
 // const io = new socketserver(Server, {
@@ -33,6 +34,7 @@ server.use("/", userRouter);
 server.use("/conversations", conversationRouter);
 server.use("/messages", messageRouter);
 server.use("/payment", stripeRouter);
+server.use("/feedbacks", feedbackRouter);
 
 //DB connection
 async function main() {

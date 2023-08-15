@@ -19,6 +19,7 @@ function CustomerService() {
       .then(
         (result) => {
           console.log(result.text);
+          alert("Message send successfully");
           e.target.reset();
         },
         (error) => {
