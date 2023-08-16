@@ -104,6 +104,9 @@ function Navbar() {
     localStorage.removeItem("updatedusername");
     localStorage.removeItem("updatedimage");
     localStorage.removeItem("result");
+    localStorage.removeItem("updatedusername");
+    localStorage.removeItem("updatedlastname");
+    localStorage.removeItem("updatedmail");
     setUser("");
     navigate("/Signin");
   };
