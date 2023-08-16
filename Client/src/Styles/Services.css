@@ -5,16 +5,24 @@
     align-items: center;
     gap: 50px;
     margin-bottom:5em;
+    
+}
+.wasteimage{
+    width: 55%;
 }
 .Messagebox{
     width: fit-content;
     padding: 20px;
     margin: 200px;
     
+    
 }
 .sendMessage{
-    width: fit-content;
-    border: 2px solid black;    
+    position: relative;
+    top: 30px;
+    right: 50px;
+    width: 300px;
+    box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);   
     padding: 40px;
     display: flex;
     flex-direction: column;
@@ -23,30 +31,58 @@
 }
 .sendMessagebtn{
     cursor: pointer;
-    background-color: aquamarine;
+    background-color: blueviolet;
     border: none;
     padding: 10px 30px;
     border-radius: 5px;
-    border: 1px rgb(0, 128, 85) solid;
+    color: white;
+    text-transform: uppercase;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .sendMessagebtn:hover{
-    background-color: rgb(0, 223, 148);
+    background-color: rgb(74, 0, 142);
     transition: all 0.2s ease-in-out;
-}
-.inputtitle{
-    padding: 10px;
 }
 .wastepage{
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 100px;
+    gap: 200px;
+}
+.reviewimage{
+    width: 30%;
+}
+.mainreview{
+    background: rgb(0,36,27);
+background: linear-gradient(90deg, rgba(0,36,27,1) 0%, rgba(110,37,132,1) 0%, rgba(49,0,51,1) 100%, rgba(0,212,255,1) 100%);
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    text-align: center;
+    align-items: center;
+    box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  
 }
 .feedback{
     display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 100px;
+}
+.rate{
+    display: flex;
     flex-direction: column;
+    align-items: center;
+}
+.messagetitle{
+    color: black;
+}
+.mes{
+    display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
-    margin: 150px;
+    margin: 200px;
 }

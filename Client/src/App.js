@@ -4,6 +4,7 @@ import Signin from "./Components/Signin";
 import Signup from "./Components/Signup";
 import Profile from "./Components/Profile";
 import WasteCollection from "./Components/Services/WasteCollection";
+import LostAndFoundObjects from "./Components/Services/LostAndFoundObjects";
 import Payment from "./Components/Payment";
 import Success from "./Components/Success";
 import Cancel from "./Components/Cancel";
@@ -19,6 +20,10 @@ function App() {
         <Route path="/Signup" element={<Signup />}></Route>
         <Route path="/Profile" element={<Profile />}></Route>
         <Route path="/WasteCollection" element={<WasteCollection />}></Route>
+        <Route
+          path="/LostAndFoundObjects"
+          element={<LostAndFoundObjects />}
+        ></Route>
         <Route path="/Payment" element={<Payment />}></Route>
         <Route path="/Success" element={<Success />}></Route>
         <Route path="/Cancel" element={<Cancel />}></Route>

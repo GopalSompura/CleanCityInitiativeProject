@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Avatar from "@mui/material/Avatar";
 import "../Styles/Profile.css";
+import TextField from "@mui/material/TextField";
 
 function Profile() {
   const username = localStorage.getItem("Username");
@@ -44,6 +45,9 @@ function Profile() {
     localStorage.setItem("updatedimage", result.Image);
   };
   const profileimg = localStorage.getItem("image");
+  const updatedusername = localStorage.getItem("updatedusername");
+  const updatedlastname = localStorage.getItem("updatedlastname");
+  const updatedmail = localStorage.getItem("updatedmail");
   return (
     <>
       <Navbar updatedimg={profileimg} />
@@ -65,31 +69,37 @@ function Profile() {
             />
           </label>
           <div className="mb-3">
-            <input
+            <TextField
+              required
+              id="filled-required"
+              label="Firstname"
+              defaultValue={updatedusername ? updatedusername : username}
+              variant="filled"
               onChange={handleform}
-              type="text"
-              className="form-control"
-              placeholder={username}
               name="FirstName"
             />
           </div>
 
           <div className="mb-3">
-            <input
+            <TextField
+              required
+              id="filled-required"
+              label="Lastname"
+              defaultValue={updatedlastname ? updatedlastname : lastname}
+              variant="filled"
               onChange={handleform}
-              type="text"
-              className="form-control"
-              placeholder={lastname}
               name="LastName"
             />
           </div>
 
           <div className="mb-3">
-            <input
+            <TextField
+              required
+              id="filled-required"
+              label="Email"
+              defaultValue={updatedmail ? updatedmail : email}
+              variant="filled"
               onChange={handleform}
-              type="email"
-              className="form-control"
-              placeholder={email}
               name="Email"
             />
           </div>

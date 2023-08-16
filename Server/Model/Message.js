@@ -5,7 +5,13 @@ const messageSchema = new Schema({
   conversationId: {
     type: String,
   },
+  username: {
+    type: String,
+  },
   sender: {
+    type: String,
+  },
+  receiver: {
     type: String,
   },
   title: {

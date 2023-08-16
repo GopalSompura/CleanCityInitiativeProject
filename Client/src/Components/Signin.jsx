@@ -39,7 +39,6 @@ function Signin() {
     const userdetails = JSON.stringify(user);
     console.log(user);
     if (!user.match) {
-      alert(user.message);
       setError(false);
       setValidation(user.message);
     } else {

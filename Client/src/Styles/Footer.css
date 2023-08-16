@@ -4,7 +4,7 @@ footer{
     box-sizing: border-box;
 	font-family: 'Poppins', sans-serif;
 }
-.container{
+.contain{
 	max-width: 1170px;
 	margin:auto;
 }
@@ -35,15 +35,12 @@ ul{
 	position: absolute;
 	left:0;
 	bottom: -10px;
-	background-color: #e91e63;
+	background-color: rgb(181, 101, 255);
 	height: 2px;
 	box-sizing: border-box;
 	width: 50px;
 }
-.footer-col ul li:not(:last-child){
-	margin-bottom: 10px;
-}
-.footer-col ul li a{
+.servicelink{
 	font-size: 16px;
 	text-transform: capitalize;
 	color: #ffffff;
@@ -53,7 +50,7 @@ ul{
 	display: block;
 	transition: all 0.3s ease;
 }
-.footer-col ul li a:hover{
+.servicelink:hover{
 	color: #ffffff;
 	padding-left: 8px;
 }

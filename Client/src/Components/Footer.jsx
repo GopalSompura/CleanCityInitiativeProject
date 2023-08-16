@@ -1,64 +1,41 @@
 import React from "react";
 import "../Styles/Footer.css";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
     <>
       <footer class="footer">
-        <div class="container">
+        <div class="contain">
           <div class="row">
             <div class="footer-col">
               <ul>
-                <h4>company</h4>
-                <li>
-                  <a href="#">about us</a>
-                </li>
-                <li>
-                  <a href="#">our services</a>
-                </li>
-                <li>
-                  <a href="#">privacy policy</a>
-                </li>
-                <li>
-                  <a href="#">affiliate program</a>
-                </li>
+                <h4>Services</h4>
+                <Link className="servicelink" to="/WasteCollection">
+                  Waste Collection
+                </Link>
+                <Link className="servicelink" to="/LostAndFoundObjects">
+                  Lost and Found Objects
+                </Link>
               </ul>
             </div>
             <div class="footer-col">
               <ul>
                 <h4>get help</h4>
-                <li>
-                  <a href="#">FAQ</a>
-                </li>
-                <li>
-                  <a href="#">shipping</a>
-                </li>
-                <li>
-                  <a href="#">returns</a>
-                </li>
-                <li>
-                  <a href="#">order status</a>
-                </li>
-                <li>
-                  <a href="#">payment options</a>
-                </li>
+                <Link className="servicelink" to="/Payment">
+                  Payment
+                </Link>
+                <Link className="servicelink" to="/Customerservice">
+                  Contact Us
+                </Link>
               </ul>
             </div>
             <div class="footer-col">
               <ul>
-                <h4>online shop</h4>
-                <li>
-                  <a href="#">watch</a>
-                </li>
-                <li>
-                  <a href="#">bag</a>
-                </li>
-                <li>
-                  <a href="#">shoes</a>
-                </li>
-                <li>
-                  <a href="#">dress</a>
-                </li>
+                <h4>Company</h4>
+                <Link className="servicelink" to="">
+                  About us
+                </Link>
               </ul>
             </div>
             <div class="footer-col">

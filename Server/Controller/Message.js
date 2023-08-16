@@ -50,3 +50,26 @@ export async function getMessages(req, res) {
     res.status(400).json(error);
   }
 }
+
+export async function getreceivedMessages(req, res) {
+  try {
+    const ID = req.params.id;
+    const messages = await messageModel.find({
+      receiver: ID,
+    });
+    res.status(200).json(messages);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+}
+export async function getsentMessages(req, res) {
+  try {
+    const ID = req.params.id;
+    const messages = await messageModel.find({
+      sender: ID,
+    });
+    res.status(200).json(messages);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+}

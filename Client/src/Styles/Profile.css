@@ -13,11 +13,19 @@
     border:2px solid rgb(44, 44, 44);
 }
 .updateprofilepic{
+    width: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
+    align-self: center;
     justify-content: center;
 }
 #file{
     display: none;
+}
+.mb-3{
+    width:525px;
+}
+#filled-required{
+    width:500px ;
 }

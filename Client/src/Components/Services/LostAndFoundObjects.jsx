@@ -7,13 +7,8 @@ import { io } from "socket.io-client";
 import Footer from "../Footer";
 import Rating from "@mui/material/Rating";
 import Review from "./Review";
-import TextField from "@mui/material/TextField";
-import Alert from "@mui/material/Alert";
-import Stack from "@mui/material/Stack";
 
-function WasteCollection() {
-  const [success, setSuccess] = useState(false);
-  const [reviewsuccess, setReviewsuccess] = useState(false);
+function LostAndFoundObjects() {
   const userdetails = localStorage.getItem("user");
   const currentuser = JSON.parse(userdetails);
   const token = localStorage.getItem("token");
@@ -26,50 +21,9 @@ function WasteCollection() {
 
   const [feedback, setFeedback] = useState({
     reviewedby: currentuser.username,
-    rating: 0,
+    rating: "",
     comment: "",
-    userimage: currentuser.image,
   });
-
-  useEffect(() => {
-    const obj = {
-      senderId: currentuser.userid,
-      receiverId: "64ace0757520c5dbededc62e",
-    };
-    const handleservice = async () => {
-      try {
-        const res = await axios.post(
-          "http://localhost:8080/conversations/Conversation",
-          obj
-        );
-        console.log(res);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    handleservice();
-  }, [currentuser.userid]);
-
-  useEffect(() => {
-    if (currentuser.userid == "64ace0757520c5dbededc62e") {
-      const obj = {
-        senderId: currentuser.userid,
-        receiverId: "64abf0ad1ef56656d9918b3d",
-      };
-      const handleservice = async () => {
-        try {
-          const res = await axios.post(
-            "http://localhost:8080/conversations/Conversation",
-            obj
-          );
-          console.log(res);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      handleservice();
-    }
-  }, []);
 
   useEffect(() => {
     socket.current = io("ws://localhost:8900");
@@ -139,24 +93,16 @@ function WasteCollection() {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    setSuccess(true);
-    setTimeout(() => {
-      setSuccess(false);
-    }, 3000);
-    const receiverid = conversation.members.find(
-      (member) => member !== currentuser.userid
-    );
     const message = {
-      username: currentuser.username,
       sender: currentuser.userid,
-      receiver: receiverid,
       text: newmessages,
       conversationId: conversation._id,
       title: newtitle,
     };
-
+    const receiverid = conversation.members.find(
+      (member) => member !== currentuser.userid
+    );
     socket.current.emit("sendmessaage", {
-      username: currentuser.username,
       senderid: currentuser.userid,
       receiverid,
       text: newmessages,
@@ -167,6 +113,7 @@ function WasteCollection() {
         "http://localhost:8080/messages/Message",
         message
       );
+      alert("Message send Successfully");
       setMessages([...messages, res.data]);
       setNewmessages("");
       setNewtitle("");
@@ -184,10 +131,7 @@ function WasteCollection() {
 
   const handlefeedback = async (event) => {
     event.preventDefault();
-    setReviewsuccess(true);
-    setTimeout(() => {
-      setReviewsuccess(false);
-    }, 3000);
+
     try {
       // Send feedback data to the backend API endpoint
       const res = await axios.post(
@@ -196,12 +140,7 @@ function WasteCollection() {
       );
       // Clear the form input values
       console.log(res);
-      setFeedback({
-        revieweby: currentuser.username,
-        rating: 0,
-        comment: "",
-        userimage: currentuser.image,
-      });
+      setFeedback({ revieweby: currentuser.username, rating: "", comment: "" });
     } catch (error) {
       // Handle any errors that occur during form submission
       console.error("Error submitting feedback:", error);
@@ -211,55 +150,31 @@ function WasteCollection() {
   return (
     <>
       <Navbar />
-      {success && (
-        <Stack
-          sx={{ width: "100%" }}
-          spacing={2}
-          style={{
-            alignItems: "center",
-            position: "relative",
-            top: "20px",
-          }}
-        >
-          <Alert
-            icon={false}
-            severity="success"
-            style={{
-              backgroundColor: "blueviolet",
-              color: "white",
-            }}
-          >
-            Message Sent
-          </Alert>
-        </Stack>
-      )}
       <div className="wastepage">
-        <img
-          src="https://images.unsplash.com/photo-1503596476-1c12a8ba09a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
-          alt=""
-          className="wasteimage"
-        />
         {token ? (
           <div className="messageContent">
             <div className="sendMessage">
-              <TextField
-                id="outlined-basic"
+              <input
+                type="text"
                 name="title"
-                label="Title"
+                id=""
+                placeholder="Title of the send message "
+                className="inputtitle"
                 onChange={(e) => setNewtitle(e.target.value)}
                 value={newtitle}
-                variant="outlined"
+                minLength="3"
               />
-              <TextField
-                id="outlined-multiline-static"
-                label="Write your message"
-                multiline
-                rows={9}
-                fullWidth={true}
+              <textarea
+                name=""
+                id=""
+                cols="30"
+                rows="10"
+                className="inputmessage"
+                placeholder="Write message here"
                 onChange={(e) => setNewmessages(e.target.value)}
                 value={newmessages}
-                defaultValue="Default Value"
-              />
+                minLength="3"
+              ></textarea>
               <button className="sendMessagebtn" onClick={handlesubmit}>
                 Send
               </button>
@@ -269,62 +184,31 @@ function WasteCollection() {
           <h2>This is main content</h2>
         )}
       </div>
-
-      <Review />
-      <div className="mainreview">
-        <h1 className="reviewtext">
-          Share your experience with WasteCollection service{" "}
-        </h1>
-        <img
-          src="https://images.unsplash.com/photo-1633613286991-611fe299c4be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-          alt=""
-          className="reviewimage"
-        />
-      </div>
-      {reviewsuccess && (
-        <Stack
-          sx={{ width: "100%" }}
-          spacing={2}
-          style={{ alignItems: "center" }}
-        >
-          <Alert
-            icon={false}
-            severity="success"
-            style={{
-              backgroundColor: "blueviolet",
-              color: "white",
-            }}
-          >
-            feedback Submitted
-          </Alert>
-        </Stack>
-      )}
       <div className="feedback">
-        <form onSubmit={handlefeedback} className="rate">
+        <h1>Give your Review</h1>
+        <form onSubmit={handlefeedback}>
           <Rating
             name="rating"
             value={feedback.rating}
             onChange={handlechange}
           />
-          <TextField
-            id="outlined-multiline-static"
-            label="Write your comment"
-            multiline
-            rows={5}
-            sx={{ width: "400px" }}
+          <textarea
             name="comment"
-            fullWidth={true}
+            cols="30"
+            rows="10"
+            className="inputmessage"
+            placeholder="Write your review"
             onChange={handlechange}
             value={feedback.comment}
-            defaultValue="Default Value"
-          />
-          <button className="sendMessagebtn">Submit</button>
+            minLength="3"
+          ></textarea>
+          <button className="sendMessagebtn">Submit Feedback</button>
         </form>
       </div>
-
+      <Review />
       <Footer />
     </>
   );
 }
 
-export default WasteCollection;
+export default LostAndFoundObjects;

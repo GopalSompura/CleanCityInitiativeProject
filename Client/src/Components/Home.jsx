@@ -5,6 +5,8 @@ import Navbar from "./Navbar";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
+import Rating from "@mui/material/Rating";
+import Review from "./Services/Review";
 function Home() {
   const [reviews, setReviews] = useState([]);
   const handleclick = async () => {
@@ -30,15 +32,7 @@ function Home() {
       <Navbar />
       <div className="backgroundimage"></div>
       <div className="main"></div>
-      {reviews.map((r) => {
-        return (
-          <>
-            <h1>{r.senderid}</h1>
-            <h1>{r.rating}</h1>
-            <h1>{r.comment}</h1>
-          </>
-        );
-      })}
+      <div className="feedbacks"></div>
       <Footer />
     </>
   );

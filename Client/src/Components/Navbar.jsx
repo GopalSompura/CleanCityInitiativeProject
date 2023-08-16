@@ -11,8 +11,6 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
-import PersonAdd from "@mui/icons-material/PersonAdd";
-import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import Button from "@mui/material/Button";
 import Fade from "@mui/material/Fade";
@@ -24,7 +22,6 @@ function Navbar() {
   const userdetails = localStorage.getItem("user");
   const currentuser = JSON.parse(userdetails);
   const [conversation, setConversation] = useState([]);
-  const [count, setCount] = useState(0);
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -69,13 +66,7 @@ function Navbar() {
       }
     };
     getMessages();
-  }, [conversation._id, currentuser.userid]);
-
-  useEffect(() => {
-    if (messages) {
-      setCount((count) => count + 1);
-    }
-  }, [messages]);
+  }, [conversation._id]);
 
   //services menu
   const [anchor, setAnchor] = React.useState(null);
@@ -117,16 +108,12 @@ function Navbar() {
     navigate("/Signin");
   };
 
-  const handlenotify = () => {
-    setCount(0);
-  };
-
   return (
     <>
       <header>
         <nav>
           <Link to="/" style={{ textDecoration: "none" }}>
-            <h1>GreenTech</h1>
+            <h1 className="greentech">GreenTech</h1>
           </Link>
           <ul>
             <Link to="/aboutus" id="aboutbtn">
@@ -160,8 +147,17 @@ function Navbar() {
               >
                 <MenuItem onClick={handleCloseE}>Waste Collection</MenuItem>
               </Link>
-              <MenuItem onClick={handleCloseE}>Lost and Found Objects</MenuItem>
-              <MenuItem onClick={handleCloseE}>Potential Hazard</MenuItem>
+              <Link
+                to="/LostAndFoundObjects"
+                style={{
+                  textDecoration: "none",
+                  color: "black",
+                }}
+              >
+                <MenuItem onClick={handleCloseE}>
+                  Lost And Found Objects
+                </MenuItem>
+              </Link>
             </Menu>
             <Link id="payment-btn" to="/Payment">
               Payment
@@ -191,7 +187,7 @@ function Navbar() {
                   }}
                 >
                   <Typography sx={{ minWidth: 100 }}>
-                    User : {updatedusername ? updatedusername : user.username}
+                    User - {updatedusername ? updatedusername : user.username}
                   </Typography>
                   <Tooltip title="Account settings">
                     <IconButton
@@ -203,7 +199,11 @@ function Navbar() {
                       aria-expanded={open ? "true" : undefined}
                     >
                       <Avatar
-                        sx={{ width: 32, height: 32 }}
+                        sx={{
+                          width: 32,
+                          height: 32,
+                          border: "1px solid white",
+                        }}
                         src={updatedimage ? updatedimage : user.image}
                       ></Avatar>
                     </IconButton>
@@ -211,14 +211,7 @@ function Navbar() {
                   {token ? (
                     <Link to="/message">
                       <div className="notification">
-                        <Badge
-                          badgeContent={
-                            currentuser.userid == "64ace0757520c5dbededc62e"
-                              ? count
-                              : 0
-                          }
-                          onClick={handlenotify}
-                        >
+                        <Badge badgeContent={0}>
                           <MailIcon />
                         </Badge>
                       </div>
@@ -268,25 +261,17 @@ function Navbar() {
                     style={{ textDecoration: "none", color: "black" }}
                   >
                     <MenuItem onClick={handleClose}>
-                      <Avatar /> Profile
+                      <Avatar
+                        sx={{
+                          width: 32,
+                          height: 32,
+                        }}
+                        src={updatedimage ? updatedimage : user.image}
+                      />{" "}
+                      {updatedusername ? updatedusername : currentuser.username}
                     </MenuItem>
                   </Link>
-                  <MenuItem onClick={handleClose}>
-                    <Avatar /> My account
-                  </MenuItem>
                   <Divider />
-                  <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                      <PersonAdd fontSize="small" />
-                    </ListItemIcon>
-                    Add another account
-                  </MenuItem>
-                  <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                      <Settings fontSize="small" />
-                    </ListItemIcon>
-                    Settings
-                  </MenuItem>
                   <Link
                     to="/Signin"
                     style={{ textDecoration: "none", color: "black" }}
