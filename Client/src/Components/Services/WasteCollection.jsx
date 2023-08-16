@@ -10,6 +10,7 @@ import Review from "./Review";
 import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
+import { Link } from "react-router-dom";
 
 function WasteCollection() {
   const [success, setSuccess] = useState(false);
@@ -32,29 +33,10 @@ function WasteCollection() {
   });
 
   useEffect(() => {
-    const obj = {
-      senderId: currentuser.userid,
-      receiverId: "64ace0757520c5dbededc62e",
-    };
-    const handleservice = async () => {
-      try {
-        const res = await axios.post(
-          "http://localhost:8080/conversations/Conversation",
-          obj
-        );
-        console.log(res);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    handleservice();
-  }, [currentuser.userid]);
-
-  useEffect(() => {
-    if (currentuser.userid == "64ace0757520c5dbededc62e") {
+    if (currentuser.userid != "64ace0757520c5dbededc62e") {
       const obj = {
         senderId: currentuser.userid,
-        receiverId: "64abf0ad1ef56656d9918b3d",
+        receiverId: "64ace0757520c5dbededc62e",
       };
       const handleservice = async () => {
         try {
@@ -69,7 +51,28 @@ function WasteCollection() {
       };
       handleservice();
     }
-  }, []);
+  }, [currentuser.userid]);
+
+  // useEffect(() => {
+  //   if (currentuser.userid == "64ace0757520c5dbededc62e") {
+  //     const obj = {
+  //       senderId: currentuser.userid,
+  //       receiverId: "64abf0ad1ef56656d9918b3d",
+  //     };
+  //     const handleservice = async () => {
+  //       try {
+  //         const res = await axios.post(
+  //           "http://localhost:8080/conversations/Conversation",
+  //           obj
+  //         );
+  //         console.log(res);
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     };
+  //     handleservice();
+  //   }
+  // }, []);
 
   useEffect(() => {
     socket.current = io("ws://localhost:8900");
@@ -264,6 +267,14 @@ function WasteCollection() {
                 Send
               </button>
             </div>
+            <Link to="/Payment">
+              <button
+                className="sendMessagebtn"
+                style={{ position: "relative", right: "50px" }}
+              >
+                Pay Now for this service
+              </button>
+            </Link>
           </div>
         ) : (
           <h2>This is main content</h2>
@@ -273,7 +284,7 @@ function WasteCollection() {
       <Review />
       <div className="mainreview">
         <h1 className="reviewtext">
-          Share your experience with WasteCollection service{" "}
+          Let us know how was your experience with WasteCollection service{" "}
         </h1>
         <img
           src="https://images.unsplash.com/photo-1633613286991-611fe299c4be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"

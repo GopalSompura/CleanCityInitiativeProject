@@ -147,7 +147,7 @@ function Navbar() {
               >
                 <MenuItem onClick={handleCloseE}>Waste Collection</MenuItem>
               </Link>
-              <Link
+              {/* <Link
                 to="/LostAndFoundObjects"
                 style={{
                   textDecoration: "none",
@@ -157,7 +157,7 @@ function Navbar() {
                 <MenuItem onClick={handleCloseE}>
                   Lost And Found Objects
                 </MenuItem>
-              </Link>
+              </Link> */}
             </Menu>
             <Link id="payment-btn" to="/Payment">
               Payment

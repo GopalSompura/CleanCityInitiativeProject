@@ -27,3 +27,31 @@
     align-items: center;
     gap: 20px;
 }
+.mes{
+    margin: 200px;
+}
+.sendpaybtn{
+    cursor: pointer;
+    background-color: blueviolet;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 5px;
+    color: white;
+    text-transform: uppercase;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.sendpaybtn:hover{
+    background-color: rgb(74, 0, 142);
+    transition: all 0.2s ease-in-out;
+}
+
+
+
+/*Success css*/
+.successpage{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    margin: 100px;
+    flex-direction: column;
+}

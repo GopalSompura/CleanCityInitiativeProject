@@ -168,7 +168,7 @@ export default function Message() {
           </Table>
         </TableContainer>
       </div>
-      {/* <h1>All Messages</h1>
+      <h1>Received Messages</h1>
       <div className="mes">
         <TableContainer
           component={Paper}
@@ -198,7 +198,7 @@ export default function Message() {
           </Table>
         </TableContainer>
       </div>
-      <h1>Sent Messages</h1>
+      {/* <h1>Sent Messages</h1>
       <div className="mes">
         <TableContainer
           component={Paper}
